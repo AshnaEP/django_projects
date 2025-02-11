@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container border border-2 border-dark shadow mt-5 p-5 w-75">
+<h3 class="text-center mt-4">Student List</h3>
+<table class="table table-bordered border-danger mt-4">
+  <tr>
+    <th>Sl.No</th>
+    <th>Student Name</th>
+    <th>Age</th>
+    <th>School</th>
+    <th>Principal</th>
+    <th>Location</th>
+  </tr>
+
+  {% for i in st %}
+  <tr>
+    <th>{{i.id}}</th>
+    <th>{{i.name}}</th>
+    <th>{{i.age}}</th>
+    <th>{{i.school.name}}</th>
+    <th>{{i.school.principal}}</th>
+    <th>{{i.school.location}}</th>
+  </tr>
+  {% endfor %}
+</table>
+
+  {{name}} <br>
+  {{school}}
+  </div>
+{% endblock %}
