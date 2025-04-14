@@ -1,0 +1,43 @@
+{% extends 'nav_base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Update Cars</title>
+{% endblock %}
+
+{% block content %}
+<div class="card-container-add mt-5 mb-5">
+    <h3 class="text-center fw-bold">Add Car</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+         <div class="mb-2">
+             <label class="form-label">Model Name</label>
+             <input type="text" class="form-control" id="name" value="{{car.name}}" name="name" required>
+         </div>
+         <div class="mb-2">
+             <label class="form-label">Color</label>
+             <input type="text" class="form-control" id="color" value="{{car.color}}" name="color" required>
+         </div>
+          <div class="mb-2">
+             <label class="form-label">Description</label>
+             <textarea class="form-control" id="description" name="description" rows="4" required>{{car.description}}</textarea>
+         </div>
+        <div class="mb-2">
+             <label class="form-label">Rent(Per day)</label>
+             <input type="number" class="form-control" id="rent" value="{{car.rent}}" name="rent" required>
+         </div>
+        <div class="mb-2">
+             <label class="form-label">Image</label>
+            <img src="{{car.image.url}}" height="90px" class="mt-4 mb-3 ms-2">
+            <input type="file" name="image">
+         </div>
+           <div class="mb-2 mt-3">
+    <input type="checkbox" id="featured" name="featured" {% if car.featured %}checked{% endif %}>
+    <label class="form-label">Featured</label>
+</div>
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

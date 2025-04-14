@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+    <style>
+        /* Full-screen background */
+        .hero-wrap {
+            position: relative;
+            height: 100vh;
+            background: url('{% static "images/bg_1.jpg" %}') no-repeat center center/cover;
+        }
+        .bg_style{
+            background: #1089ff;
+            position: relative;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 550px;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 100vh; /* Set a max height */
+            overflow-y: auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">Car<span>Book</span></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{% url 'cars:home' %}" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="{% url 'cars:about' %}" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="{% url 'cars:car_list' %}" class="nav-link">Cars</a></li>
+                {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                <li class="nav-item"><a href="car.html" class="nav-link">Add Cars</a></li>
+                <li class="nav-item"><a href="car.html" class="nav-link">View Booking</a></li>
+                <li class="nav-item"><a href="{% url 'user:logout' %}" class="nav-link">Logout</a></li>
+                {% else %}
+                <li class="nav-item"><a href="{% url 'booking:my_bookings' %}" class="nav-link">My Bookings</a></li>
+	            <li class="nav-item"><a href="{% url 'cars:contact' %}" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="{% url 'user:logout' %}" class="nav-link">Logout</a></li>
+                {% endif %}
+                {% else %}
+                <li class="nav-item"><a href="{% url 'cars:contact' %}" class="nav-link">Contact Us</a></li>
+                <li class="nav-item"><a href="{% url 'user:register' %}" class="nav-link">SignUp</a></li>
+                <li class="nav-item"><a href="{% url 'user:login' %}" class="nav-link">SignIn</a></li>
+                {% endif %}
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+<div  style="background-image: url('{% static 'images/bg_1.jpg' %}');
+no-repeat center center;
+            background-size: cover;
+            width: 100vw;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;"
+     data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container mb-5">
+        <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
+          <div class="hero-wrap">
+        <div class="overlay"></div>
+        <div class="bg_style text-light mt-5">
+            <h3 class="text-light text-center">Update your trip details</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label  class="label">Name</label>
+                    <input type="text" class="form-control" name="name" value="{{b.name}}" required readonly>
+                </div>
+
+                <div class="d-flex">
+			    					<div class="form-group mr-2">
+			                <label  class="label">Email</label>
+			                <input type="text" class="form-control" name="email" value="{{b.email}}" required readonly>
+			              </div>
+
+                    <div class="form-group ml-2">
+			                <label class="label">Phone Number</label>
+                               <div class="input-group">
+                                <span class="input-group-text">+971</span>
+                                   <input type="text" class="form-control" name="phone" maxlength="9" value="{{b.phone}}" placeholder="Enter phone number" required>
+                                </div>
+			              </div>
+		              </div>
+
+                <div class="form-group">
+                    <label  class="label">Pick-up location</label>
+                    <input type="text" class="form-control" name="pick_up_location" value="{{b.pick_up_location}}" required>
+                </div>
+
+                <div class="form-group">
+                    <label  class="label">Drop-off location</label>
+                    <input type="text" class="form-control" name="drop_off_location" value="{{b.drop_off_location}}" required>
+                </div>
+
+
+
+                		<div class="d-flex">
+			    					<div class="form-group mr-2">
+			                <label  class="label">Pick-up Date</label>
+			                <input type="date" class="form-control" id="pick_up_date" name="pick_up_date" value="{{b.pick_up_date|date:'Y-m-d'}}" required>
+			              </div>
+			              <div class="form-group ml-4">
+			                <label class="label">Pick-up Time</label>
+			                <input type="time" class="form-control" name="pick_up_time" value="{{b.pick_up_time|time:'H:i'}}" required>
+			              </div>
+		              </div>
+
+                <div class="d-flex">
+                <div class="form-group mr-2">
+		                <label class="label">Drop-off Date</label>
+		                <input type="date" class="form-control" id="d_date" name="drop_off_date" value="{{b.drop_off_date|date:'Y-m-d'}}" required>
+		              </div>
+
+                    <div class="form-group ml-4">
+		                <label class="label">Drop-off Time</label>
+		                <input type="time" class="form-control" name="drop_off_time" value="{{b.drop_off_time|time:'H:i'}}" required>
+		              </div>
+                </div>
+
+                   <div class="form-group">
+                    <label  class="label">Number of Days</label>
+                    <input type="number" class="form-control" id="n_days" name="num_of_days" value="{{b.num_of_days}}" required readonly>
+                </div>
+
+                <!--Button-->
+                <div class="form-group text-center mt-3">
+                    <input type="submit" value="Save Changes" class="btn btn-secondary py-3 px-4">
+                </div>
+
+            </form>
+        </div>
+    </div>
+        </div>
+      </div>
+    </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const pDateInput = document.getElementById("p_date");
+    const dDateInput = document.getElementById("d_date");
+    const nDaysInput = document.getElementById("n_days");
+
+    // Set today's date as the minimum for pick-up
+    const today = new Date().toISOString().split("T")[0];
+    pDateInput.min = today;
+
+    function calculateDays() {
+        const pDate = new Date(pDateInput.value);
+        const dDate = new Date(dDateInput.value);
+
+        if (!isNaN(pDate.getTime()) && !isNaN(dDate.getTime())) {
+            const timeDiff = dDate.getTime() - pDate.getTime();
+            let daysDiff = timeDiff / (1000 * 60 * 60 * 24);
+
+            if (daysDiff >= 0) {
+                nDaysInput.value = daysDiff === 0 ? 1 : daysDiff; // If same day, set to 1
+            } else {
+                nDaysInput.value = "";
+            }
+        }
+    }
+
+    // When the user selects a pick-up date
+    pDateInput.addEventListener("change", function () {
+        if (pDateInput.value) {
+            dDateInput.min = pDateInput.value; // Set min drop-off date as pick-up date
+            dDateInput.value = ""; // Reset drop-off if invalid
+            nDaysInput.value = ""; // Reset number of days
+        }
+    });
+
+    // Recalculate days on date selection
+    pDateInput.addEventListener("change", calculateDays);
+    dDateInput.addEventListener("change", calculateDays);
+});
+</script>
+</body>
+</html>

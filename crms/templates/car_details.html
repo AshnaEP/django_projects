@@ -1,0 +1,35 @@
+{% extends 'car_base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Details</title>
+{% endblock %}
+
+{% block content %}
+<section class="ftco-section ftco-no-pt bg-light">
+<div class="container mt-5">
+  <h2 class="mb-3">{{details.name}}</h2>
+  <img class="mb-4" src="{{details.image.url}}" height="350px" width="50%">
+  <p class="mb-4 text-dark" style="font-size:18px;">Type : <span> {{details.car_type}}</span></p>
+  <p class="mb-4 text-dark" style="font-size:18px;>Color : <span> {{details.color}}</span></p>
+  <h4 class="price ml-auto">Why Rent a <span>{{details.name}}?</span></h4>
+  <p style="text-align: justify;">{{details.description}}</p>
+
+  {% if user.is_superuser %}
+  <div class="mt-4 d-flex">
+    <a href="{% url 'cars:editcar' details.id %} " class="btn btn-primary me-4 p-2 px-5">Edit Details</a>
+    <a href="{% url 'cars:delete_car' details.id %}" class="btn btn-primary me-4 p-2 px-5">Delete</a>
+  </div>
+  {% else %}
+  <div class="mt-4">
+    <a href="{% if user.is_authenticated %}
+                 {% url 'booking:bookcar' details.id %}
+             {% else %}
+                 {% url 'user:login' %}
+             {% endif %}"
+       class="btn btn-primary me-4 p-2 px-5">Book Now</a>
+    </div>
+  {% endif %}
+</div>
+</section>
+{% endblock %}

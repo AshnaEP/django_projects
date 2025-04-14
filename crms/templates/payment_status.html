@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends 'nav_base.html' %}
+
+{% block title %}
+<title>Payment Status</title>
+{% endblock %}
+
+{% block content %}
+<div class="mb-5" style="position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
+     <div class="container mt-2">
+        <form method="POST">
+        {% csrf_token %}
+        <p style="color: black;">Your payment of AED 100 was successful. Please pay the remaining amount when you collect the car.
+          Additionally, bring the following documents when picking up the car:</p>
+          <ul class="text-dark">
+            <li>A copy of your driving license</li>
+            <li>A copy of your Emirates ID</li>
+          </ul>
+                     <a href="{% url 'cars:home' %}" class="btn btn-primary">Continue Browsing</a>
+<!--        <input type="submit" class="btn btn-primary" value="Continue Browsing" onclick="{% url 'cars:home' %}">-->
+    </form>
+     </div>
+</div>
+{% endblock %}

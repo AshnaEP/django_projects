@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    {% endblock %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+
+  <style>
+        /* Full-screen background */
+        .hero-wrap {
+            position: relative;
+            height: 100vh;
+            background: url('{% static "images/bg_1.jpg" %}') no-repeat center center/cover;
+        }
+   </style>
+</head>
+<body>
+ <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">Car<span>Book</span></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{% url 'cars:home' %}" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="{% url 'cars:about' %}" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="{% url 'cars:car_list' %}" class="nav-link">Cars</a></li>
+                {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                <li class="nav-item"><a href="car.html" class="nav-link">Add Cars</a></li>
+                <li class="nav-item"><a href="{% url 'booking:all_bookings' %}" class="nav-link">View Booking</a></li>
+                <li class="nav-item"><a href="{% url 'user:logout' %}" class="nav-link">Logout</a></li>
+                {% else %}
+                <li class="nav-item"><a href="{% url 'booking:my_bookings' %}" class="nav-link">My Bookings</a></li>
+	            <li class="nav-item"><a href="{% url 'cars:contact' %}" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="{% url 'user:logout' %}" class="nav-link">Logout</a></li>
+                {% endif %}
+                {% else %}
+                <li class="nav-item"><a href="{% url 'cars:contact' %}" class="nav-link">Contact Us</a></li>
+                <li class="nav-item"><a href="{% url 'user:register' %}" class="nav-link">SignUp</a></li>
+                <li class="nav-item"><a href="{% url 'user:login' %}" class="nav-link">SignIn</a></li>
+                {% endif %}
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+ <div style="background-image: url('{% static 'images/bg_1.jpg' %}');
+no-repeat center center;
+            background-size: cover;
+            width: 100vw;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;"
+     data-stellar-background-ratio="0.5">
+<div class="overlay"></div>
+     <div class="container mb-5">
+        <div class="mb-4 row no-gutters slider-text justify-content-start align-items-center justify-content-center">
+        {% block content %}
+        {% endblock %}
+        </div>
+     </div>
+ </div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends 'car_base.html' %}
+{% load static %}
+
+{% block title %}
+<title>My Bookings</title>
+{% endblock %}
+
+{% block content %}
+<section class="ftco-section ftco-no-pt bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+        </div>
+        {% if booking %}
+        <div class="row">
+            {% for b in booking %}
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url('{{b.car.image.url}}'); height: 200px; background-size: cover;">
+                    </div>
+
+                  <div class="text">
+                        <h2 class="mb-0"
+                            style=" white-space: nowrap;text-overflow: ellipsis;overflow: hidden; ">
+                            {{b.car.name}}</h2>
+                    <p class="text-center"><a href="{% url 'booking:my_booking_details' b.id %}" class="btn btn-secondary py-2 ml-1 mt-2" style="width: 180px;">View Details</a></p>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h4>No bookings available</h4>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

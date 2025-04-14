@@ -1,0 +1,56 @@
+{% extends 'car_base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Cars</title>
+{% endblock %}
+
+{% block content %}
+    <div class=" details-card">
+      <div class="booking-header">
+        <h3 class="text-center">Booking Details</h3>
+      </div>
+      <div class="booking-details">
+      <h5 class="mb-3 mt-4">Booking ID: {{booked.booking_id}}</h5>
+        <p>Name : <strong>{{booked.name}}</strong></p>
+      <p>Email : <strong>{{booked.email}}</strong></p>
+      <p>Phone : <strong>+971 {{booked.phone}}</strong></p>
+      <p>Car Name : <strong>{{booked.car.name}}</strong></p>
+      <p>Rent(Per Day) : <strong>AED {{booked.car.rent}}</strong></p>
+      <p>Total Amount : <strong>AED {{booked.totalAmount}}</strong></p>
+      <p>Paid Amount : <strong>AED {{booked.paidAmount}}</strong></p>
+      <p>Remaining Amount to Pay: <strong>AED {{booked.balanceAmount}}</strong></p>
+      <p>Pick up Location : <strong>{{booked.pick_up_location}}</strong></p>
+      <p>Pick up Date : <strong>{{booked.pick_up_date}}</strong></p>
+      <p>Pick up Time : <strong>{{booked.pick_up_time}}</strong></p>
+      <p>Drop off Location : <strong>{{booked.drop_off_location}}</strong></p>
+      <p>Drop off Date : <strong>{{booked.drop_off_date}}</strong></p>
+      <p>Drop off Time : <strong>{{booked.drop_off_time}}</strong></p>
+      <p>Number of Days : <strong>{{booked.num_of_days}}</strong></p>
+    </div>
+<!--       <div class="mt-4 d-flex">-->
+<!--    <a href="{% url 'booking:update_booking' booked.id%}" class="btn btn-primary me-4 p-2 px-5">Update Booking</a>-->
+<!--    <a href="{% url 'booking:cancel-booking' booked.id%}" class="btn btn-primary me-4 p-2 px-5">Cancel Booking</a>-->
+<!--  </div>-->
+      {% load tz %}  {# Load timezone support #}
+
+{% now "Y-m-d H:i:s" as current_time %}  {# Get current datetime #}
+
+{% with booked.pick_up_date|date:"Y-m-d" as pickup_date %}
+{% with booked.pick_up_time|time:"H:i:s" as pickup_time %}
+  {% with pickup_date|add:" " as pickup_datetime %}
+    {% with pickup_datetime|add:pickup_time as pickup_full_datetime %}
+
+      {% if pickup_full_datetime > current_time %}
+        <div class="mt-4 d-flex">
+          <a href="{% url 'booking:update_booking' booked.id %}" class="btn btn-primary me-4 p-2 px-5">Update Booking</a>
+          <a href="{% url 'booking:cancel-booking' booked.id %}" class="btn btn-primary me-4 p-2 px-5">Cancel Booking</a>
+        </div>
+      {% endif %}
+
+    {% endwith %}
+  {% endwith %}
+{% endwith %}
+{% endwith %}
+      </div>
+{% endblock %}
