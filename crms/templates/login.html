@@ -34,32 +34,6 @@
             background: url('{% static "images/bg_1.jpg" %}') no-repeat center center/cover;
         }
 
-<!--        .overlay {-->
-<!--            position: absolute;-->
-<!--            top: 0;-->
-<!--            left: 0;-->
-<!--            width: 100%;-->
-<!--            height: 100%;-->
-<!--            background: rgba(0, 0, 0, 0.5);-->
-<!--        }-->
-
-<!--        /* Centered Card */-->
-<!--        .card-container {-->
-<!--            position: absolute;-->
-<!--            top: 50%;-->
-<!--            left: 50%;-->
-<!--            transform: translate(-50%, -50%);-->
-<!--            width: 400px;-->
-<!--            background: white;-->
-<!--            border-radius: 10px;-->
-<!--            padding: 20px;-->
-<!--            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);-->
-<!--        }-->
-
-<!--        .card-title {-->
-<!--            text-align: center;-->
-<!--            font-weight: bold;-->
-<!--        }-->
     </style>
 </head>
 <body>
@@ -122,7 +96,12 @@ no-repeat center center;
                 </div>
                 <div class="mb-2">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="d-flex align-items-center position-relative">
+                        <input type="password" class="form-control" id="password"
+                               name="password" required>
+                    <img src="{% static 'images/eye-close.png' %}" style="width: 25px;cursor:pointer;"
+                    class="position-absolute top-50 translate-middle-y end-0 me-3" id="eyeicon">
+                    </div>
                 </div>
                 <div class="text-center mt-3">
                     <button type="submit" class="btn btn-primary">Login</button>
@@ -144,5 +123,20 @@ no-repeat center center;
         </div>
       </div>
     </div>
+
+<script>
+  let eyeicon = document.getElementById("eyeicon");
+  let password = document.getElementById("password");
+    eyeicon.onclick = function(){
+        if(password.type == "password"){
+            password.type = "text";
+            eyeicon.src = "{% static 'images/eye-open.png' %}"
+        }else{
+            password.type = "password";
+            eyeicon.src = "{% static 'images/eye-close.png' %}"
+        }
+    }
+</script>
+
 </body>
 </html>
