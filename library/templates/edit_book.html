@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Add Books</title>
+{% endblock %}
+
+{% block content %}
+<h1 class="mt-5 mb-5" style="text-align:center">Edit Books</h1>
+<div class="container" style="display: flex;justify-content: center;">
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+  <label  class="form-label">Book Name</label>
+  <input type="text" class="form-control"  value="{{book.title}}" style="width:300px" name="t">
+</div>
+
+     <div class="mb-3">
+     <label class="form-label">Author</label>
+       <input type="text" class="form-control" value="{{book.author}}" style="width:300px" name="a">
+     </div>
+
+
+     <div class="mb-3">
+     <label class="form-label">Price</label>
+       <input type="text" class="form-control" value="{{book.price}}" style="width:300px" name="p">
+     </div>
+
+     <div class="mb-3">
+     <label class="form-label">Language</label>
+       <input type="text" class="form-control" value="{{book.language}}" style="width:300px" name="l">
+     </div>
+
+    <div class="mb-3">
+     <label class="form-label">Pages</label>
+       <input type="text" class="form-control" value="{{book.pages}}" style="width:300px" name="pgs">
+     </div>
+
+    <div class="mb-3">
+     <label class="form-label">Images</label>
+      <img src="{{book.image.url}}" height="100px" class="mb-3 ms-2">
+       <input type="file" class="form-control" style="width:300px" name="im">
+     </div>
+
+    <div class="mb-3">
+     <label class="form-label">Pdf</label>
+      <a href="{{book.pdf.url}}" class="ms-3">{{book.pdf.url}}</a>
+       <input type="file" class="form-control"  style="width:300px" name="pdf">
+     </div>
+
+    <div class="mb-3">
+        <input type="submit">
+    </div>
+</form>
+</div>
+{% endblock %}

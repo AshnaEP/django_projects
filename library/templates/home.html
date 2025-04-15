@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Home</title>
+{% endblock %}
+
+{% block content %}
+<h2 class="mt-5" style="text-align:center">Welcome To Home Page</h2>
+{% if user.is_authenticated %} {{user.username}}
+{% else %}Guest{% endif %}
+{% endblock %}

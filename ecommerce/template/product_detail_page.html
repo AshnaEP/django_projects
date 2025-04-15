@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- single product Details-->
+	<div class="single-product mt-100 mb-100">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="single-product-img">
+						<img src="{{p.image.url}}" height="450px" width="100%">
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="single-product-content">
+						<h3>{{p.name}}</h3>
+                        <h4>Product Details</h4>
+						<p>{{p.description}}</p>
+						<h4>₹ {{p.price}}</h4>
+                        <p>Available Stock: {{p.stock}}</p>
+
+						{% if user.is_superuser %}   <!-- if user is admin -->
+							{% if p.stock > 0 %}
+								<p>Product In Stock</p>
+								 <div class="single-product-form">
+									<a href="{% url 'cart:add_stock' p.id %}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add Stock</a>
+								 </div>
+							{% else %}
+								<p>Product Out of Stock</p>
+								 <div class="single-product-form">
+									<a href="{% url 'cart:add_stock' p.id %}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add Stock</a>
+								 </div>
+							{% endif %}
+						{% else %} <!-- if user is normal user -->
+							{% if  p.stock > 0 %}
+								<div class="single-product-form">
+									<a href="{% url 'cart:addcart' p.id%}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+								</div>
+							{% else %}
+								<p>Product Out of Stock</p>
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end single product Details-->
+{% endblock %}

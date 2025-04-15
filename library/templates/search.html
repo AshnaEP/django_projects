@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Search Result</title>
+{% endblock %}
+
+{% block content %}
+
+<h1 class="mt-5" style="text-align:center">Search Result</h1>
+<div class="container mx-auto p-3">
+
+<!--  Table view  -->
+{% if book %}
+    <table class="table table-bordered bg-light">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Pages</th>
+        <th>Language</th>
+        <th>Cover</th>
+        <th>Document</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    {% for i in book %}
+    <tr>
+        <td>{{i.title}}</td>
+        <td>{{i.author}}</td>
+        <td>{{i.price}}</td>
+        <td>{{i.pages}}</td>
+        <td>{{i.language}}</td>
+        <td><img src="{{i.image.url}}" height="100px" width="100px"></td>
+        <td><a href="{{i.pdf.url}}">Download</a></td>
+        <td><a href="{% url 'books:view_details' i.id %}" class="btn btn-danger">View</a></td>
+        <td><a href="{% url 'books:edit_book' i.id %}" class="btn btn-danger">Edit</a></td>
+        <td><a href="{% url 'books:delete_book' i.id %}" class="btn btn-danger">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+    {% else %}
+    <h3 class="text-center">No result found</h3>
+    {% endif %}
+</div>
+
+{% endblock %}
+

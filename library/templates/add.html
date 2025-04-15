@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Add Books</title>
+{% endblock %}
+
+{% block content %}
+<h1 class="mt-5 mb-5" style="text-align:center">Add Books</h1>
+<div class="container" style="display: flex;justify-content: center;">
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+  <label  class="form-label">Book Name</label>
+  <input type="text" class="form-control"  placeholder="Enter Book name" style="width:300px" name="t">
+</div>
+
+     <div class="mb-3">
+     <label class="form-label">Author</label>
+       <input type="text" class="form-control"  placeholder="Enter Author name" style="width:300px" name="a">
+     </div>
+
+
+     <div class="mb-3">
+     <label class="form-label">Price</label>
+       <input type="text" class="form-control"  placeholder="Enter Price" style="width:300px" name="p">
+     </div>
+
+     <div class="mb-3">
+     <label class="form-label">Language</label>
+       <input type="text" class="form-control"  placeholder="Enter Language" style="width:300px" name="l">
+     </div>
+
+    <div class="mb-3">
+     <label class="form-label">Pages</label>
+       <input type="text" class="form-control"  placeholder="Enter Pages" style="width:300px" name="pgs">
+     </div>
+
+    <div class="mb-3">
+     <label class="form-label">Images</label>
+       <input type="file" class="form-control" style="width:300px" name="i">
+     </div>
+
+    <div class="mb-3">
+     <label class="form-label">Pdf</label>
+       <input type="file" class="form-control"  style="width:300px" name="pdf">
+     </div>
+
+    <div class="mb-3">
+        <input type="submit">
+    </div>
+</form>
+</div>
+{% endblock %}

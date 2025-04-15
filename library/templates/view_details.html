@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container w-50 mx-auto">
+<h2 class="text-center">Book Details</h2>
+<table class="table table-bordered mt-5">
+
+    <tr>
+      <th>Cover</th>
+      <td><img src="{{book.image.url}}" height="200px" width="200px"></td>
+    </tr>
+
+
+    <tr>
+        <th>Title</th>
+        <td>{{book.title}}</td>
+    </tr>
+
+    <tr>
+      <th>Author</th>
+      <td>{{book.author}}</td>
+    </tr>
+        <tr>
+      <th>Pages</th>
+      <td>{{book.pages}}</td>
+    </tr>
+        <tr>
+      <th>Price</th>
+      <td>{{book.price}}</td>
+    </tr>
+        <tr>
+      <th>Language</th>
+      <td>{{book.language}}</td>
+    </tr>
+        <tr>
+      <th>Document</th>
+      <td><a href="{{book.pdf.url}}" class="btn btn-danger">Download</a></td>
+    </tr>
+
+</table>
+    </div>
+{% endblock %}
