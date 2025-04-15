@@ -104,34 +104,18 @@
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form action="#" class="request-form ftco-animate bg-primary">
-		          		<h2>Make your trip</h2>
-			    				<div class="form-group">
-			    					<label  class="label">Pick-up location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-			    				</div>
-			    				<div class="form-group">
-			    					<label  class="label">Drop-off location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-			    				</div>
-			    				<div class="d-flex">
-			    					<div class="form-group mr-2">
-			                <label  class="label">Pick-up date</label>
-			                <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
-			              </div>
-			              <div class="form-group ml-2">
-			                <label class="label">Drop-off date</label>
-			                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
-			              </div>
-		              </div>
-		              <div class="form-group">
-		                <label class="label">Pick-up time</label>
-		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
-		              </div>
-			            <div class="form-group">
-			              <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
-			            </div>
-			    			</form>
+                            <div class="request-form ftco-animate bg-primary text-white p-4 rounded">
+                                <h2 class="mb-4">Welcome to CarBook!</h2>
+                                <p>Experience seamless car rentals with CarBook. Whether you're planning a weekend getaway or a business trip, we’ve got the perfect ride for you.</p>
+                                <ul class="list-unstyled mt-4">
+                                    <li><strong>✓</strong> Wide range of vehicles for every need</li>
+                                    <li><strong>✓</strong> Trusted by thousands of happy travelers</li>
+                                    <li><strong>✓</strong> 24/7 customer support</li>
+                                </ul>
+                                <p class="mt-4">Skip the paperwork — find your ride and hit the road with ease.</p>
+                                <a href="{% url 'cars:car_list' %}" class="btn btn-secondary py-3 px-4 mt-3">Explore Our Fleet</a>
+                            </div>
+
 	  					</div>
 	  					<div class="col-md-8 d-flex align-items-center">
 	  						<div class="services-wrap rounded-right w-100">
@@ -162,7 +146,7 @@
 					            </div>
 					          </div>
 					        </div>
-					        <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
+					        <p><a href="{% url 'cars:car_list' %}" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
 	  						</div>
 	  					</div>
 	  				</div>
