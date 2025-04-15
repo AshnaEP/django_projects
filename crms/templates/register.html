@@ -107,11 +107,19 @@ no-repeat center center;
                 </div>
                 <div class="mb-2">
                     <label for="password" class="form-label">Password</label>
+                    <div class="d-flex align-items-center position-relative">
                     <input type="password" class="form-control" id="password" name="p" required>
+                        <img src="{% static 'images/eye-close.png' %}" style="width: 25px;cursor:pointer;"
+                    class="position-absolute top-50 translate-middle-y end-0 me-3" id="eyeicon">
+                    </div>
                 </div>
                 <div class="mb-2">
                     <label for="password" class="form-label">Confirm Password</label>
+                    <div class="d-flex align-items-center position-relative">
                     <input type="password" class="form-control" id="cp" name="cp" required>
+                        <img src="{% static 'images/eye-close.png' %}" style="width: 25px;cursor:pointer;"
+                    class="position-absolute top-50 translate-middle-y end-0 me-3" id="eyeicon2">
+                    </div>
                 </div>
                 <div class="text-center mt-3">
                     <button type="submit" class="btn btn-primary">Sign Up</button>
@@ -133,5 +141,33 @@ no-repeat center center;
         </div>
       </div>
     </div>
+
+<script>
+  let eyeicon = document.getElementById("eyeicon");
+  let password = document.getElementById("password");
+    eyeicon.onclick = function(){
+        if(password.type == "password"){
+            password.type = "text";
+            eyeicon.src = "{% static 'images/eye-open.png' %}"
+        }else{
+            password.type = "password";
+            eyeicon.src = "{% static 'images/eye-close.png' %}"
+        }
+    }
+
+
+    let eyeicon2 = document.getElementById("eyeicon2");
+    let cp = document.getElementById("cp");
+    eyeicon2.onclick = function () {
+        if (cp.type === "password") {
+            cp.type = "text";
+            eyeicon2.src = "{% static 'images/eye-open.png' %}";
+        } else {
+            cp.type = "password";
+            eyeicon2.src = "{% static 'images/eye-close.png' %}";
+        }
+    }
+</script>
+
 </body>
 </html>
