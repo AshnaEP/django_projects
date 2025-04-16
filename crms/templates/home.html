@@ -224,14 +224,18 @@
                                     {% if user.is_superuser %}
                                          <p class="text-center"><a href="{% url 'cars:car_details' i.id %}" class="btn btn-secondary py-2 ml-1 mt-2" style="width: 180px;">Details</a></p>
                                     {% else %}
-                                        <p class="d-flex mb-0 d-block"><a
-                                            href="
-                                            {% if user.is_authenticated %}
-                                            {% url 'booking:bookcar' i.id %}
+                                        <p class="d-flex mb-0 d-block">
+                                            {% if i.available %}
+                                                <a href="
+                                                  {% if user.is_authenticated %}
+                                                    {% url 'booking:bookcar' i.id %}
+                                                  {% else %}
+                                                    {% url 'user:login' %}
+                                                  {% endif %}"
+                                                class="btn btn-primary py-2 mr-1">Book now</a>
                                             {% else %}
-                                            {% url 'user:login' %}
-                                            {% endif %}"
-                                            class="btn btn-primary py-2 mr-1">Book now</a>
+                                                <a class="btn btn-danger text-white py-2 mr-1" style="cursor: default;">Unavailable</a>
+                                            {% endif %}
                                         <a href="{% url 'cars:car_details' i.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
                                     {% endif %}
 
