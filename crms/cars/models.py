@@ -19,6 +19,7 @@ class Car(models.Model):
     rent=models.IntegerField(default=0)
     image=models.ImageField(upload_to='image',blank=True,null=True)
     featured = models.BooleanField(default=False)
+    available = models.BooleanField(default=True)
     def __str__(self):
         return self.name
 

@@ -11,7 +11,7 @@
   <h2 class="mb-3">{{details.name}}</h2>
   <img class="mb-4" src="{{details.image.url}}" height="350px" width="50%">
   <p class="mb-4 text-dark" style="font-size:18px;">Type : <span> {{details.car_type}}</span></p>
-  <p class="mb-4 text-dark" style="font-size:18px;>Color : <span> {{details.color}}</span></p>
+  <p class="mb-4 text-dark" style="font-size:18px;">Color : <span> {{details.color}}</span></p>
   <h4 class="price ml-auto">Why Rent a <span>{{details.name}}?</span></h4>
   <p style="text-align: justify;">{{details.description}}</p>
 
@@ -22,12 +22,16 @@
   </div>
   {% else %}
   <div class="mt-4">
-    <a href="{% if user.is_authenticated %}
-                 {% url 'booking:bookcar' details.id %}
-             {% else %}
-                 {% url 'user:login' %}
-             {% endif %}"
+    {% if details.available == True %}
+        <a href="{% if user.is_authenticated %}
+                      {% url 'booking:bookcar' details.id %}
+                  {% else %}
+                      {% url 'user:login' %}
+                  {% endif %}"
        class="btn btn-primary me-4 p-2 px-5">Book Now</a>
+    {% else %}
+       <h5 class="text-danger">Not Available!!</h5>
+    {% endif %}
     </div>
   {% endif %}
 </div>
