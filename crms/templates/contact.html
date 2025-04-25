@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block content %}
+<script>
+	function f(){
+	alert('Thank you for your review!');
+	}
+</script>
 <section class="ftco-section contact-section">
       <div class="container">
         <div class="row d-flex mb-5 contact-info">
@@ -18,7 +23,7 @@
 			            <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
 			          </div>
 		          </div>
-		          <div class="col-md-12">
+				 <div class="col-md-12">
 		          	<div class="border w-100 p-4 rounded mb-2 d-flex">
 			          	<div class="icon mr-3">
 			          		<span class="icon-mobile-phone"></span>
@@ -37,44 +42,33 @@
 		        </div>
           </div>
           <div class="col-md-8 block-9 mb-md-5">
-            <form method="POST" class="bg-light p-5 contact-form">
+            <form method="POST" class="bg-light p-5 contact-form" onsubmit="f()">
 				{% csrf_token %}
 			  <h5 class="text-center mb-4">Add Your Review Here!</h5>
               <div class="form-group">
-                <input type="text" class="form-control" value="{{username}}" readonly name="user_name">
-              </div>
+                <input type="text" class="form-control" value="{{username}}"
+					   {% if user.is_authenticated %}readonly{% endif %} name="user_name">
+					</div>
               <div class="form-group">
-                <input type="text" class="form-control" value="{{user_email}}" readonly name="user_email">
+                <input type="text" class="form-control" value="{{user_email}}"
+					   {% if user.is_authenticated %}readonly{% endif %} name="user_email">
               </div>
-<!--              <div class="form-group">-->
-<!--                <input type="text" class="form-control" placeholder="Subject">-->
-<!--              </div>-->
+
               <div class="form-group">
                 <textarea name="review" id="" cols="30" rows="7" class="form-control" placeholder="Review"></textarea>
               </div>
               <div class="form-group">
-                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                <input type="submit" value="Submit Review" class="btn btn-primary py-3 px-5">
               </div>
             </form>
-
-<!--		{% if messages %}-->
-<!--    <div id="message-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">-->
-<!--        {% for message in messages %}-->
-<!--            <div class="alert alert-{{ message.tags }} flash-message">-->
-<!--                {{ message }}-->
-<!--            </div>-->
-<!--        {% endfor %}-->
-<!--    </div>-->
-
-<!--    <script>-->
-<!--        // Wait for 2 seconds before redirecting to home-->
-<!--        setTimeout(function () {-->
-<!--            window.location.href = "{% url 'cars:home' %}";  // Redirect to home-->
-<!--        }, 2000);  // Show message for 2 seconds-->
-<!--    </script>-->
-<!--{% endif %}-->
           </div>
         </div>
       </div>
     </section>
+{% if show_alert %}
+<script>
+
+    window.location.href = "{% url 'cars:home' %}";
+</script>
+{% endif %}
 {% endblock %}

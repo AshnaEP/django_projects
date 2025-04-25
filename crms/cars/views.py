@@ -117,17 +117,8 @@ class AutomaticCars(ListView):
 #         return redirect('cars:car_list')
 #     return render(request,'book_car.html')
 
-from django.contrib import messages
 class AddReview(CreateView):
     model = Reviews
     template_name = 'contact.html'
     fields = ['user_name','user_email','review']
     success_url = reverse_lazy('cars:home')
-
-    # def form_valid(self, form):
-    #     messages.success(self.request,
-    #     return super().form_valid(form)
-    #
-    # def form_invalid(self, form):
-    #     messages.error(self.request, "There was an error submitting the review.")
-    #     return self.render_to_response(self.get_context_data(form=form))
