@@ -34,17 +34,3 @@ class Reviews(models.Model):
     def __str__(self):
         return self.user_name
 
-# class CarBooking(models.Model):
-#     car=models.ForeignKey(Car,on_delete=models.CASCADE)
-#     user=models.ForeignKey(User,on_delete=models.CASCADE)
-#     name=models.CharField(max_length=35)
-#     email=models.CharField(max_length=50)
-#     phone=models.IntegerField()
-#     pick_up_location=models.CharField(max_length=200,default="Unknown Location")
-#     pick_up_date=models.DateField()
-#     pick_up_time=models.TimeField()
-#     num_of_days=IntegerField()
-#     drop_off_location=models.CharField(max_length=200,default="Unknown Location")
-#     drop_off_date=models.DateField()
-#     drop_off_time=models.TimeField()
-#     booking_date = models.DateTimeField(auto_now_add=True)

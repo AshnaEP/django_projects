@@ -96,26 +96,6 @@ class AutomaticCars(ListView):
         queryset=qs.filter(car_type='Automatic')
         return queryset
 
-# def bookCar(request,i):
-#     u = request.user
-#     c = Car.objects.get(id=i)
-#     if (request.method == 'POST'):
-#         name=request.POST['n']
-#         email=request.POST['e']
-#         ph=request.POST['p']
-#         p_location=request.POST['pl']
-#         p_date=request.POST['p_date']
-#         p_time=request.POST['p_time']
-#         days=request.POST['n_days']
-#         d_location=request.POST['dl']
-#         d_date=request.POST['d_date']
-#         d_time=request.POST['d_time']
-#         c_booking=CarBooking.objects.create(car=c,user=u,name=name,email=email,phone=ph,
-#             pick_up_location=p_location,pick_up_date=p_date,pick_up_time=p_time,num_of_days=days,
-#             drop_off_location=d_location,drop_off_date=d_date,drop_off_time=d_time)
-#         c_booking.save()
-#         return redirect('cars:car_list')
-#     return render(request,'book_car.html')
 
 class AddReview(CreateView):
     model = Reviews
