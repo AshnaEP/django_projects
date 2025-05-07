@@ -18,7 +18,7 @@ def contact(request):
 class AddCar(CreateView):
     model = Car
     template_name = 'add_cars.html'
-    fields = ['name','color','description','rent','image','featured']
+    fields = ['car_type','name','color','description','rent','image','featured']
     success_url = reverse_lazy('cars:car_list')
 
 

@@ -45,14 +45,34 @@
             <form method="POST" class="bg-light p-5 contact-form" onsubmit="f()">
 				{% csrf_token %}
 			  <h5 class="text-center mb-4">Add Your Review Here!</h5>
+
+
+             {% if user.is_authenticated %}
               <div class="form-group">
                 <input type="text" class="form-control" value="{{username}}"
-					   {% if user.is_authenticated %}readonly{% endif %} name="user_name">
+					   readonly name="user_name">
 					</div>
+				{% else %}
+				<div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Name"
+					    name="user_name">
+              </div>
+				{% endif %}
+
+
+             {% if user.is_authenticated %}
               <div class="form-group">
                 <input type="text" class="form-control" value="{{user_email}}"
-					   {% if user.is_authenticated %}readonly{% endif %} name="user_email">
+					   readonly name="user_email">
               </div>
+				{% else %}
+				<div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Email"
+					    name="user_email">
+              </div>
+				{% endif %}
+
+
 
               <div class="form-group">
                 <textarea name="review" id="" cols="30" rows="7" class="form-control" placeholder="Review"></textarea>
