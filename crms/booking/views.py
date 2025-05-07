@@ -43,8 +43,6 @@ def bookCar(request,i):
 
         # retrieve the status from response
         status = response_payment['status']
-        print('***************************************')
-        print(status)
         if (status == 'created'):
             p = Payment.objects.create(name=u.username, amount=total, order_id=order_id)
             p.save()
@@ -56,8 +54,6 @@ def bookCar(request,i):
             c_booking.save()
             context = {'payment': response_payment, 'name': u.username}
             return render(request, 'payment.html', context)
-        print('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
-        print(status)
 
     return render(request,'book_car.html')
 
@@ -107,10 +103,27 @@ def myBooking(request):
     return render(request, 'my_bookings.html', context)
 
 
+from datetime import datetime
+from django.utils import timezone
+from zoneinfo import ZoneInfo
 class MyBookingDetails(DetailView):
     model = CarBooking
     context_object_name = 'booked'
     template_name = 'my_booking_details.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        booked = context['booked']
+
+        # Combine and localize pickup datetime
+        pickup_naive = datetime.combine(booked.pick_up_date, booked.pick_up_time)
+        pickup_dt = pickup_naive.replace(tzinfo=ZoneInfo("Asia/Dubai"))
+
+        # Get current time in Abu Dhabi timezone
+        now_local = timezone.now().astimezone(ZoneInfo("Asia/Dubai"))
+
+        # Compare and set flag
+        context['can_modify_booking'] = pickup_dt > now_local and not self.request.user.is_superuser
+        return context
 
 
 class AllBookings(ListView):

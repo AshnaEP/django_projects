@@ -28,29 +28,33 @@
       <p>Drop off Time : <strong>{{booked.drop_off_time}}</strong></p>
       <p>Number of Days : <strong>{{booked.num_of_days}}</strong></p>
     </div>
-<!--       <div class="mt-4 d-flex">-->
-<!--    <a href="{% url 'booking:update_booking' booked.id%}" class="btn btn-primary me-4 p-2 px-5">Update Booking</a>-->
-<!--    <a href="{% url 'booking:cancel-booking' booked.id%}" class="btn btn-primary me-4 p-2 px-5">Cancel Booking</a>-->
-<!--  </div>-->
-      {% load tz %}  {# Load timezone support #}
 
-{% now "Y-m-d H:i:s" as current_time %}  {# Get current datetime #}
+      {% if can_modify_booking %}
+  <div class="mt-4 d-flex">
+    <a href="{% url 'booking:update_booking' booked.id %}" class="btn btn-primary me-4 p-2 px-5">Update Booking</a>
+    <a href="{% url 'booking:cancel-booking' booked.id %}" class="btn btn-primary me-4 p-2 px-5">Cancel Booking</a>
+  </div>
+{% endif %}
 
-{% with booked.pick_up_date|date:"Y-m-d" as pickup_date %}
-{% with booked.pick_up_time|time:"H:i:s" as pickup_time %}
-  {% with pickup_date|add:" " as pickup_datetime %}
-    {% with pickup_datetime|add:pickup_time as pickup_full_datetime %}
+<!--      {% load tz %}  {# Load timezone support #}-->
 
-      {% if pickup_full_datetime > current_time and not user.is_superuser%}
-        <div class="mt-4 d-flex">
-          <a href="{% url 'booking:update_booking' booked.id %}" class="btn btn-primary me-4 p-2 px-5">Update Booking</a>
-          <a href="{% url 'booking:cancel-booking' booked.id %}" class="btn btn-primary me-4 p-2 px-5">Cancel Booking</a>
-        </div>
-      {% endif %}
+<!--{% now "Y-m-d H:i:s" as current_time %}  {# Get current datetime #}-->
 
-    {% endwith %}
-  {% endwith %}
-{% endwith %}
-{% endwith %}
+<!--{% with booked.pick_up_date|date:"Y-m-d" as pickup_date %}-->
+<!--{% with booked.pick_up_time|time:"H:i:s" as pickup_time %}-->
+<!--  {% with pickup_date|add:" " as pickup_datetime %}-->
+<!--    {% with pickup_datetime|add:pickup_time as pickup_full_datetime %}-->
+
+<!--      {% if pickup_full_datetime > current_time and not user.is_superuser%}-->
+<!--        <div class="mt-4 d-flex">-->
+<!--          <a href="{% url 'booking:update_booking' booked.id %}" class="btn btn-primary me-4 p-2 px-5">Update Booking</a>-->
+<!--          <a href="{% url 'booking:cancel-booking' booked.id %}" class="btn btn-primary me-4 p-2 px-5">Cancel Booking</a>-->
+<!--        </div>-->
+<!--      {% endif %}-->
+
+<!--    {% endwith %}-->
+<!--  {% endwith %}-->
+<!--{% endwith %}-->
+<!--{% endwith %}-->
       </div>
 {% endblock %}
